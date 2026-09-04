@@ -124,6 +124,16 @@ OneDrive：https://1drv.ms/u/s!AgNFVSzSYXMahcEZejoUwCaHRcactQ?e=YsOYy2
 
 ## Run FasterLIO
 
+> [!NOTE]
+> If you observe inconsistent results (e.g., ATE) on 12th-generation or newer Intel processors with a hybrid P-core/E-core architecture, try pinning the process to either the performance cores (P-cores) or the efficiency cores (E-cores):
+
+```bash
+# Run the process on P-cores
+taskset -c "$(cat /sys/bus/event_source/devices/cpu_core/cpus)" roslaunch ...
+# Run the process on E-cores
+taskset -c "$(cat /sys/bus/event_source/devices/cpu_atom/cpus)" roslaunch ...
+```
+
 FasterLIO can be called like a plain binary program. It can run in offline mode or online mode like any ros program.
 
 - Offline mode
